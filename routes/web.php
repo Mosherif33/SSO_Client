@@ -50,11 +50,11 @@ Route::get("/callback", function (Request $request) {
     return $response->json();
 });
 
-Route::get("/authuser", function() {
-    $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5YjQzNWM4Yy1jMDMxLTRiZjgtYWRhMC1kOGU0NmE0MWE2ODEiLCJqdGkiOiI1ZDgyMDUyOTVhZDJhY2NkMzAyNjZhOTUyMmE2MjMzZTc1NDU0OTkzNTU4NGVmMGRlOTc4MGQ2NDE3YzE2YjQ2OGE4YWVjOGEzOTkwNDFjYiIsImlhdCI6MTcwNzIzMjY0Ny4zNjQ1NzEsIm5iZiI6MTcwNzIzMjY0Ny4zNjQ1OSwiZXhwIjoxNzA3MzE5MDQ3LjMyMTI1Miwic3ViIjoiMSIsInNjb3BlcyI6W119.QHEfSnmFoHc_IE6cfrBKVS0RFRASpQjb2RrIUJKpxykjCBYx_C2xGJfWItIaeyX-SmM7vgm8XiWDbxehZHpygdlXLbOKHTSLIMSu_LFPXSl_6A4ySyj9AI6QvUtw6TsAY7hqedarCAxF6Pf2U_SUcurTOsctps1JHNdozXcghICcYjC_aBmhuJonhQb8HdZnI-3Do2mDpnyCSGBf1oFgKsJigbvRqYJZZ3eFRzu9FL7W_fa6u-HK2RwV2yrIG-tRoctVPLjdJF1nhJIQInY08IvdS259oJbaVq3rIXS97NWyVOw8OuZ74z2ztooXDuwYVP9ItmUXyQSEu0tHgfXY7ie6heJuxl_NjJD87GOAlUVqaraKE5dZek1n5SAN27HUi2uHjbtLwY95lFLl2sqdU7VGyXrLc-Qm1YlF1Ztld5B2xwGl8q60OyIB0OK_0PKZ7Zv81YzlIOixX77w7cLX03CP8AtNYdRWVW08xRWZj1XZ_5Zp9HFPi8pRZuF9k_cE9h_MnzlOmJil6vyAdW3uhaoonLiRYY1NgxEldelcm62wAFBjpYlSn1vzfhXphIpuiagDla-WghGbLCjtlXlQJqVAcqkR5pK5nRuUQa6c_We7seHwXrL5DtbtOBGH_jkq63VBG4Yw4BQSrwW6zSqAZVsVbr9trFqvBn19zq95vls";
+Route::get("/authuser", function(Request $request) {
+    $access_token = $request->session()->get("access_token");
     $response = Http::withHeaders([
         "Accept" => "application/json",
-        "Authorization" => "Bearer " . $access_token,
+        "Authorization" => "Bearer " . $access_token
     ])->get("http://127.0.0.1:8000/api/user");
     return $response->json();
 });
